@@ -29,7 +29,7 @@ export const BANKS = [
 
 export const PayGoLogo = () => (
   <div className="flex flex-col items-center">
-    <div className="relative w-40 h-16 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-950 flex items-center justify-center rounded-lg shadow-xl overflow-hidden">
+    <div className="relative w-40 h-16 bg-gradient-to-r from-purple-950 via-purple-900 to-black flex items-center justify-center rounded-lg shadow-xl overflow-hidden border border-purple-800/20">
         <div className="absolute top-0 right-0 w-12 h-12 bg-white opacity-5 rounded-full -mr-6 -mt-6"></div>
         <div className="absolute bottom-0 left-0 w-20 h-20 bg-white opacity-5 rounded-full -ml-10 -mb-10"></div>
         
@@ -48,7 +48,7 @@ export const PayGoLogo = () => (
 );
 
 export const PayGoBanner = () => (
-  <div className="w-full max-w-sm h-28 rounded-xl overflow-hidden shadow-md mb-8 relative bg-gradient-to-r from-purple-900 via-purple-700 to-orange-500 flex items-center justify-center">
+  <div className="w-full max-w-sm h-28 rounded-xl overflow-hidden shadow-md mb-8 relative bg-gradient-to-r from-purple-950 via-purple-800 to-black flex items-center justify-center border border-purple-800/20">
     <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
     <div className="relative flex flex-col items-center">
       <div className="flex items-baseline">

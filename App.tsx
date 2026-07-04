@@ -231,7 +231,7 @@ const WelcomePage: React.FC = () => {
 
       <button 
         onClick={() => navigate('/onboarding', { state: { name, email } })}
-        className="w-full h-14 bg-gradient-to-r from-purple-600 to-orange-500 text-white rounded-2xl text-base font-semibold shadow-xl hover:opacity-90 transition-all active:scale-[0.98]"
+        className="w-full h-14 bg-gradient-to-r from-purple-700 via-purple-900 to-black text-white rounded-2xl text-base font-semibold shadow-xl hover:opacity-90 transition-all active:scale-[0.98]"
       >
         Continue to Dashboard
       </button>
@@ -264,8 +264,8 @@ const OnboardingWizard: React.FC = () => {
     },
     {
       title: "Get Your PAY ID",
-      text: "To withdraw funds, you'll need to purchase a PAY ID for ₦6,500. This is a one-time purchase that unlocks all features of the app.",
-      icon: <i className="fas fa-id-card text-blue-600 text-xl"></i>,
+      text: "To withdraw funds, you'll need to purchase a PAY ID for ₦7,500. This is a one-time purchase that unlocks all features of the app.",
+      icon: <i className="fas fa-id-card text-purple-600 text-xl"></i>,
     },
     {
       title: "Zero Fees",
@@ -289,7 +289,7 @@ const OnboardingWizard: React.FC = () => {
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
       <div className="w-full max-sm:max-w-xs max-w-sm bg-white rounded-[2rem] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 dark:bg-gray-900">
-        <div className="relative bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500 p-6 pb-8 text-white">
+        <div className="relative bg-gradient-to-br from-purple-950 via-purple-900 to-black p-6 pb-8 text-white">
           <button 
             onClick={() => navigate('/dashboard', { state: { name, email } })}
             className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
@@ -329,7 +329,7 @@ const OnboardingWizard: React.FC = () => {
 
           <button 
             onClick={handleNext}
-            className="w-full h-14 bg-gradient-to-r from-purple-600 to-orange-500 text-white rounded-2xl text-base font-semibold shadow-xl hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center"
+            className="w-full h-14 bg-gradient-to-r from-purple-700 via-purple-900 to-black text-white rounded-2xl text-base font-semibold shadow-xl hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center"
           >
             {step === totalSteps ? 'Get Started' : 'Next →'}
           </button>
@@ -412,7 +412,7 @@ const EarnMoneyPage: React.FC = () => {
 
   return (
     <div className="w-full animate-in fade-in duration-500 dark:text-white">
-      <div className="flex items-center bg-gradient-to-r from-orange-500 to-amber-600 text-white p-3 -mx-8 -mt-8 mb-6 sticky top-0 z-10">
+      <div className="flex items-center bg-gradient-to-r from-purple-950 via-purple-900 to-black text-white p-3 -mx-8 -mt-8 mb-6 sticky top-0 z-10">
         <button onClick={() => navigate(-1)} className="mr-3">
           <i className="fas fa-arrow-left text-lg"></i>
         </button>
@@ -439,7 +439,7 @@ const EarnMoneyPage: React.FC = () => {
           className={`w-full h-16 rounded-2xl text-lg font-black shadow-lg transition-all active:scale-95 flex items-center justify-center space-x-3 ${
             timeLeft > 0 || claiming 
               ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-700 dark:text-gray-500' 
-              : 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:opacity-90'
+              : 'bg-gradient-to-r from-purple-700 via-purple-900 to-black text-white hover:opacity-90'
           }`}
         >
           {claiming ? (
@@ -892,8 +892,8 @@ const UpgradeAccountPage: React.FC = () => {
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                   <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                    8024998087
-                    <button onClick={() => {navigator.clipboard.writeText('8024998087'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                    6677318221
+                    <button onClick={() => {navigator.clipboard.writeText('6677318221'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                   </p>
                 </div>
                 <div>
@@ -902,7 +902,7 @@ const UpgradeAccountPage: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OPAY</p>
+                  <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Moniepoint</p>
                 </div>
               </div>
             </div>
@@ -1114,8 +1114,8 @@ const BuyPayIdPage: React.FC = () => {
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Account Number</p>
                 <p className="text-2xl font-black text-purple-900 tracking-tight flex items-center justify-between dark:text-white">
-                  8024998087
-                  <button onClick={() => {navigator.clipboard.writeText('8024998087'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
+                  6677318221
+                  <button onClick={() => {navigator.clipboard.writeText('6677318221'); alert('Copied!');}} className="text-[10px] bg-purple-200 text-purple-700 px-3 py-1 rounded-lg font-bold dark:bg-purple-900 dark:text-purple-200">COPY</button>
                 </p>
               </div>
               <div>
@@ -1124,7 +1124,7 @@ const BuyPayIdPage: React.FC = () => {
               </div>
               <div>
                 <p className="text-[10px] text-purple-400 font-bold uppercase mb-1">Bank Name</p>
-                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">OPAY</p>
+                <p className="text-lg font-bold text-purple-900 uppercase dark:text-white">Moniepoint</p>
               </div>
             </div>
           </div>
@@ -1212,7 +1212,7 @@ const BuyPayIdPage: React.FC = () => {
           <div className="relative">
             <input 
               readOnly 
-              value="₦6,500" 
+              value="₦7,500" 
               className="w-full h-14 px-6 bg-white rounded-2xl border border-gray-100 text-gray-500 text-sm font-medium shadow-sm outline-none dark:bg-gray-800 dark:border-gray-700"
             />
           </div>
@@ -1557,12 +1557,12 @@ const DashboardPage: React.FC = () => {
       <div className="h-5"></div>
 
       <div className="flex justify-center my-4">
-        <div className="w-24 h-8 rounded-lg bg-gradient-to-r from-purple-900 via-purple-700 to-orange-500 flex items-center justify-center shadow-lg">
+        <div className="w-24 h-8 rounded-lg bg-gradient-to-r from-purple-950 via-purple-900 to-black flex items-center justify-center shadow-lg">
           <span className="text-white font-bold text-sm tracking-tighter">PAYGO</span>
         </div>
       </div>
       
-      <div className="bg-[#6b21a8] rounded-[2rem] p-6 text-white mb-6 shadow-2xl relative overflow-hidden dark:bg-purple-900">
+      <div className="bg-gradient-to-br from-purple-950 via-purple-900 to-black rounded-[2rem] p-6 text-white mb-6 shadow-2xl relative overflow-hidden border border-purple-800/10">
         <div className="flex justify-between items-start mb-5">
           <div className="flex items-center space-x-2.5">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center overflow-hidden border border-white/10">
@@ -1673,8 +1673,8 @@ const DashboardPage: React.FC = () => {
 
       <div className="space-y-3">
         <h3 className="font-bold text-gray-800 text-base px-1 dark:text-gray-200">Current Promotions</h3>
-        <div className="relative group overflow-hidden rounded-[1.5rem] shadow-lg aspect-[16/9] bg-[#312e81]">
-          <div className="absolute inset-0 bg-gradient-to-tr from-purple-900 via-indigo-900 to-orange-500"></div>
+        <div className="relative group overflow-hidden rounded-[1.5rem] shadow-lg aspect-[16/9] bg-black">
+          <div className="absolute inset-0 bg-gradient-to-tr from-purple-950 via-purple-900 to-black"></div>
           <img 
             src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800" 
             alt="Promotion"
