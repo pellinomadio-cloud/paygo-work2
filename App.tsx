@@ -1493,6 +1493,179 @@ const TransferPage: React.FC = () => {
   );
 };
 
+const TasksPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email || "";
+  const name = location.state?.name || "User";
+
+  const [wallet, setWallet] = useState<UserWallet>(() => getWallet(email));
+  const [claimed, setClaimed] = useState<boolean>(() => {
+    return localStorage.getItem(`paygo_task_telegram_${email}`) === 'true';
+  });
+  const [hasClickedJoin, setHasClickedJoin] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [claimedSuccess, setClaimedSuccess] = useState(false);
+
+  const handleJoinTelegram = () => {
+    window.open("https://t.me/chix9jacom", "_blank");
+    setHasClickedJoin(true);
+  };
+
+  const handleClaimReward = () => {
+    if (!hasClickedJoin) {
+      alert("Please click 'Join Channel' first to join @chix9jacom on Telegram before claiming your reward.");
+      return;
+    }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      const rewardAmount = 70000;
+      const newWallet: UserWallet = {
+        balance: wallet.balance + rewardAmount,
+        transactions: [
+          {
+            id: `task-tg-${Date.now()}`,
+            type: 'Credit',
+            label: 'Telegram Task Reward (@chix9jacom)',
+            amount: rewardAmount,
+            date: new Date().toLocaleDateString()
+          },
+          ...wallet.transactions
+        ]
+      };
+
+      updateWallet(email, newWallet);
+      setWallet(newWallet);
+      localStorage.setItem(`paygo_task_telegram_${email}`, 'true');
+      setClaimed(true);
+      setLoading(false);
+      setClaimedSuccess(true);
+    }, 1200);
+  };
+
+  return (
+    <div className="w-full animate-in fade-in duration-500 dark:text-white pb-10">
+      <div className="flex items-center bg-purple-600 text-white p-3 -mx-8 -mt-8 mb-6 sticky top-0 z-10 shadow-md">
+        <button onClick={() => navigate(-1)} className="mr-3 hover:opacity-80 transition-opacity">
+          <i className="fas fa-arrow-left text-lg"></i>
+        </button>
+        <h1 className="text-lg font-bold">Tasks & Rewards</h1>
+      </div>
+
+      {/* Header Banner */}
+      <div className="bg-gradient-to-br from-purple-950 via-purple-900 to-black rounded-3xl p-6 text-white mb-6 shadow-xl border border-purple-800/20 relative overflow-hidden">
+        <div className="relative z-10">
+          <div className="inline-flex items-center space-x-1.5 bg-purple-500/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-purple-200 border border-purple-400/30 mb-2">
+            <i className="fas fa-coins text-yellow-400"></i>
+            <span>EARN EXTRA CASH</span>
+          </div>
+          <h2 className="text-xl font-black mb-1">Complete Tasks, Earn Money</h2>
+          <p className="text-xs text-purple-200/80 leading-relaxed">
+            Perform simple tasks below to get instant cash credited directly into your PayGo wallet balance!
+          </p>
+        </div>
+      </div>
+
+      {claimedSuccess && (
+        <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-2xl mb-6 flex items-center space-x-3 dark:bg-green-900/30 dark:border-green-800 dark:text-green-200 animate-in zoom-in-95">
+          <div className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center text-lg flex-shrink-0">
+            <i className="fas fa-check"></i>
+          </div>
+          <div>
+            <h4 className="font-bold text-sm">Reward Claimed!</h4>
+            <p className="text-xs">₦70,000 has been credited to your PayGo wallet balance.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Task List */}
+      <div className="space-y-4">
+        <h3 className="font-bold text-gray-800 text-sm px-1 dark:text-gray-200 uppercase tracking-wider">
+          Available Tasks
+        </h3>
+
+        {!claimed ? (
+          <div className="bg-white rounded-3xl p-5 shadow-lg border border-purple-100 dark:bg-gray-800 dark:border-gray-700 transition-all">
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center text-2xl shadow-md">
+                  <i className="fab fa-telegram-plane"></i>
+                </div>
+                <div>
+                  <h4 className="font-black text-gray-800 text-base dark:text-white leading-tight">
+                    Join Telegram Channel
+                  </h4>
+                  <p className="text-xs text-purple-600 font-bold dark:text-purple-400">
+                    @chix9jacom
+                  </p>
+                </div>
+              </div>
+              <div className="bg-green-100 text-green-700 text-xs font-black px-3 py-1.5 rounded-full dark:bg-green-900/40 dark:text-green-300">
+                +₦70,000
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-600 dark:text-gray-300 mb-5 leading-relaxed bg-purple-50/50 dark:bg-purple-900/10 p-3 rounded-2xl border border-purple-50 dark:border-purple-900/20">
+              Join our official Telegram channel <strong>@chix9jacom</strong> to stay updated and claim your instant reward of <strong>₦70,000</strong>!
+            </p>
+
+            <div className="space-y-2.5">
+              <button
+                onClick={handleJoinTelegram}
+                className="w-full h-12 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl text-xs font-bold shadow-md hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center space-x-2"
+              >
+                <i className="fab fa-telegram-plane text-base"></i>
+                <span>Step 1: Join Channel (@chix9jacom)</span>
+                {hasClickedJoin && <i className="fas fa-check-circle text-green-300 ml-1"></i>}
+              </button>
+
+              <button
+                onClick={handleClaimReward}
+                disabled={loading}
+                className={`w-full h-12 rounded-2xl text-xs font-bold shadow-lg transition-all flex items-center justify-center space-x-2 ${
+                  hasClickedJoin 
+                    ? 'bg-purple-600 text-white hover:bg-purple-700 active:scale-[0.98]' 
+                    : 'bg-gray-200 text-gray-500 cursor-not-allowed dark:bg-gray-700 dark:text-gray-400'
+                }`}
+              >
+                {loading ? (
+                  <i className="fas fa-circle-notch animate-spin text-base"></i>
+                ) : (
+                  <>
+                    <i className="fas fa-gift text-base"></i>
+                    <span>Step 2: Claim ₦70,000 Reward</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-3xl p-8 text-center shadow-sm border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            <div className="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl dark:bg-purple-900/30 dark:text-purple-400">
+              <i className="fas fa-circle-check"></i>
+            </div>
+            <h4 className="font-bold text-gray-800 text-base mb-1 dark:text-white">All Tasks Completed!</h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 max-w-xs mx-auto">
+              You have claimed all available tasks for now. Check back later for new tasks and rewards!
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-8">
+        <button
+          onClick={() => navigate('/dashboard', { state: { name, email } })}
+          className="w-full h-14 bg-black text-white rounded-2xl text-sm font-bold shadow-xl active:scale-[0.98] transition-all dark:bg-purple-600"
+        >
+          Return to Dashboard
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const DashboardPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1514,7 +1687,12 @@ const DashboardPage: React.FC = () => {
   
   const wallet = useMemo(() => getWallet(email), [email]);
 
+  const isTelegramTaskClaimed = useMemo(() => {
+    return localStorage.getItem(`paygo_task_telegram_${email}`) === 'true';
+  }, [email, location.key]);
+
   const quickActions = [
+    { id: 'tasks', label: 'Tasks', icon: 'fa-list-check', color: 'text-purple-600', bg: 'bg-white' },
     { id: 'payid', label: 'Buy PAY ID', icon: 'fa-credit-card', color: 'text-yellow-600', bg: 'bg-white' },
     { id: 'watch', label: 'Watch', icon: 'fa-tv', color: 'text-blue-500', bg: 'bg-white' },
     { id: 'airtime', label: 'Airtime', icon: 'fa-signal', color: 'text-green-500', bg: 'bg-white' },
@@ -1526,7 +1704,9 @@ const DashboardPage: React.FC = () => {
   ];
 
   const handleAction = (id: string) => {
-    if (id === 'payid') {
+    if (id === 'tasks') {
+      navigate('/tasks', { state: { name, email } });
+    } else if (id === 'payid') {
       navigate('/buy-pay-id', { state: { name, email } });
     } else if (id === 'profile') {
       navigate('/profile', { state: { name, email } });
@@ -1613,6 +1793,31 @@ const DashboardPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Special Telegram Task Banner (if not claimed) */}
+      {!isTelegramTaskClaimed && (
+        <div 
+          onClick={() => navigate('/tasks', { state: { name, email } })}
+          className="bg-gradient-to-r from-purple-950 via-purple-900 to-black rounded-2xl p-4 text-white mb-6 shadow-xl border border-purple-500/30 flex items-center justify-between cursor-pointer hover:scale-[1.01] transition-all relative overflow-hidden"
+        >
+          <div className="flex items-center space-x-3.5 relative z-10">
+            <div className="w-11 h-11 bg-purple-600 rounded-xl flex items-center justify-center text-xl text-yellow-300 shadow-md flex-shrink-0 animate-bounce">
+              <i className="fas fa-gift"></i>
+            </div>
+            <div>
+              <div className="flex items-center space-x-2 mb-0.5">
+                <span className="bg-yellow-400 text-black text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">TASK AVAILABLE</span>
+                <span className="text-yellow-300 font-black text-xs">+₦70,000</span>
+              </div>
+              <h4 className="font-bold text-xs text-white">Join Telegram Channel Task</h4>
+              <p className="text-[10px] text-purple-200">Click to join @chix9jacom & claim ₦70,000</p>
+            </div>
+          </div>
+          <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white text-xs">
+            <i className="fas fa-chevron-right"></i>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-4 gap-3 mb-6">
         {quickActions.map((action, i) => (
@@ -1892,6 +2097,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/earn" element={<EarnMoneyPage />} />
+          <Route path="/tasks" element={<TasksPage />} />
           <Route path="/buy-airtime" element={<BuyAirtimePage />} />
           <Route path="/buy-data" element={<BuyDataPage />} />
           <Route path="/transactions" element={<TransactionsPage />} />
